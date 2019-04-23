@@ -1,0 +1,21 @@
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    vertical-align: middle;
+    font-size: 1.5em;
+}
+
+.table>tbody>tr:nth-child(2n){
+    background-color: #e1e1e1;
+}
+
+th {
+    padding-right: 1em;
+}
+
+tbody>tr {
+    height: 3em;
+}
+
+
+h1 {
+    padding-bottom: 1em;
+}

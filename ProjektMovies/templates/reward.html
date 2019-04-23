@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if reward %}
+        <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8">
+        <p><img style="height: 40px; width: auto;" src="{{ reward.icon }}" /></p>
+        <p>{{ reward.name }}</p>
+        </div>
+    {% endif %}
+    <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8">
+    {% if relatedmovies %}
+    <h2>Przyznane dla filmu:</h2>
+        <div class="col-lg-12 col-md-12">
+            <table class="table table-condensed">
+                <tbody>
+                {% for movie in relatedmovies %}
+                    <tr>
+                        <td><img style="height: 60px; width: auto;" src="{{ movie.for_movie.poster }}" /></td>
+                        <td> <a href="{% url 'Movies.views.movie' movie.for_movie.id %}">{{ movie.for_movie.title }}</a></td>
+                        <td>{{ movie.for_what }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endif %}
+    {% if relatedpersons %}
+        <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8">
+    <h2>Przyznane dla osoby:</h2>
+        <div class="col-lg-12 col-md-12">
+            <table class="table table-condensed">
+                <tbody>
+                {% for person in relatedpersons %}
+                    <tr>
+                        <td><img style="height: 60px; width: auto;" src="{{ person.for_person.poster }}" /></td>
+                        <td><a href="{% url 'Persons.views.person' person.for_person.id %}">{{ person.for_person.first_name }} {{ person.for_person.last_name }}</a></td>
+                        <td>{{ person.for_what }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}

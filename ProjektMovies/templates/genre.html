@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if genre %}
+        <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8">
+        <p>{{ genre.name }}</p>
+        <p>{{ genre.description }}</p>
+        </div>
+    {% endif %}
+    <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8">
+    {% if relatedmovies %}
+    <h2>Filmy tego gatunku:</h2>
+        <div class="col-lg-12 col-md-12">
+            <table class="table table-condensed">
+                <tbody>
+                {% for movie in relatedmovies %}
+                    <tr>
+                        <td><img style="height: 60px; width: auto;" src="{{ movie.for_movie.poster }}" /></td>
+                        <td> <a href="{% url 'Movies.views.movie' movie.for_movie.id %}">{{ movie.for_movie.title }}</a></td>
+                        <td>{{ movie.for_what }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}

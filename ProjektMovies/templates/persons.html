@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load i18n utility_tags %}
+
+{% block content %}
+       <div class="col-lg-offset-2 col-lg-8">
+        <table class="table table-responsive">
+        <thead>
+            <tr>
+                <td>Plakat</td>
+                <td>Imię i nazwisko</td>
+            </tr>
+        </thead>
+            <tbody>
+                {% for person in object_list %}
+                    <tr>
+                        <td><img style="height:5em; width: auto" src="{{ person.poster }}" /></td>
+                        <td><a href="{% url 'Persons.views.person' person.id %}">{{ person.first_name }} {{ person.last_name }}</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+</div>
+
+    {% if object_list.has_other_pages %}
+        <div class="col-lg-offset-2 col-lg-8">
+        <ul class="pagination">
+            {% if object_list.has_previous %}
+                <li><a href="{% append_to_query page=object_list.previous_page_number %}">&laquo;</a></li>
+            {% else %}
+                <li class="disabled"><span>&laquo;</span></li>
+            {% endif %}
+
+        {% for page_number in object_list.paginator.page_range %}
+            {% if page_number == object_list.number %}
+                <li class="active">
+                    <span>{{ page_number }} <span class="sronly">(current)</span></span>
+                </li>
+            {% else %}
+                <li>
+                    <a href="{% append_to_query page=page_number%}">{{ page_number }}</a>
+                </li>
+            {% endif %}
+        {% endfor %}
+
+        {% if object_list.has_next %}
+            <li><a href="{% append_to_query page=object_list.next_page_number %}">&raquo;</a></li>
+        {% else %}
+            <li class="disabled"><span>&raquo;</span></li>
+        {% endif %}
+            </ul>
+        </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+    <h3>User email:</h3><p>{{ user.email }}</p>
+    <h3>User nickname:</h3><p>{{ user }}</p>
+    {% if user.first_name %}
+    <h3>User first name:</h3><p> {{ user.first_name }}</p>
+    <h3>User last name:</h3><p> {{ user.last_name }}</p>
+    {% endif %}
+{% endblock %}
